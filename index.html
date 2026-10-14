@@ -28,12 +28,12 @@
         input, select, textarea, button { outline: none; -webkit-tap-highlight-color: transparent; }
     </style>
 </head>
-<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen flex flex-col uppercase">
 
     <!-- LOADING OVERLAY -->
     <div id="globalLoader" class="fixed inset-0 bg-slate-900 bg-opacity-80 z-[100] flex flex-col items-center justify-center text-white hidden">
         <div class="loader mb-4"></div>
-        <p id="loaderText" class="font-bold tracking-widest uppercase text-center px-4">Sedang Menghubungi Pelayan Firebase...</p>
+        <p id="loaderText" class="font-bold tracking-widest uppercase text-center px-4">Sedang Menghubungi Pelayan...</p>
     </div>
 
     <!-- MODAL -->
@@ -50,8 +50,8 @@
         <div class="w-full max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row items-center justify-between p-3 md:px-6 md:h-16 space-y-3 md:space-y-0">
                 <div class="flex items-center space-x-3 w-full md:w-auto justify-center md:justify-start">
-                    <div class="flex items-center justify-center">
-                        <img src="JATA.jpg" alt="Logo KPDN" class="h-10 md:h-12 object-contain bg-white p-1 rounded-md shadow-sm">
+                    <div class="flex items-center justify-center bg-white p-1 rounded-md shadow-sm">
+                        <img src="JATA.jpg" alt="Logo KPDN" class="h-10 md:h-12 object-contain">
                     </div>
                     <div class="text-center md:text-left flex-1">
                         <h1 class="text-sm md:text-lg font-bold uppercase tracking-wide leading-tight">SISTEM E-REPORT KPDN</h1>
@@ -60,10 +60,10 @@
                 </div>
                 
                 <nav class="flex w-full md:w-auto overflow-x-auto gap-2 pb-1 md:pb-0 justify-center hide-scrollbar">
-                    <button onclick="window.switchTab('dashboard')" id="nav-dashboard" class="nav-btn flex-shrink-0 px-4 py-2 rounded-lg bg-blue-600 text-[11px] sm:text-sm font-bold transition">Borang</button>
-                    <button onclick="window.switchTab('sejarah')" id="nav-sejarah" class="nav-btn flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-[11px] sm:text-sm font-bold transition">Sejarah</button>
-                    <button onclick="window.switchTab('admin')" id="nav-admin" class="nav-btn hidden flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-yellow-400 text-[11px] sm:text-sm font-bold transition">Admin</button>
-                    <button onclick="window.logout()" class="flex-shrink-0 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-[11px] sm:text-sm font-bold transition">Keluar</button>
+                    <button onclick="window.switchTab('dashboard')" id="nav-dashboard" class="nav-btn flex-shrink-0 px-4 py-2 rounded-lg bg-blue-600 text-[11px] sm:text-sm font-bold transition uppercase">Borang</button>
+                    <button onclick="window.switchTab('sejarah')" id="nav-sejarah" class="nav-btn flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-[11px] sm:text-sm font-bold transition uppercase">Sejarah</button>
+                    <button onclick="window.switchTab('admin')" id="nav-admin" class="nav-btn hidden flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-yellow-400 text-[11px] sm:text-sm font-bold transition uppercase">Admin</button>
+                    <button onclick="window.logout()" class="flex-shrink-0 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-[11px] sm:text-sm font-bold transition uppercase">Keluar</button>
                 </nav>
             </div>
         </div>
@@ -73,8 +73,8 @@
     <div id="loginOverlay" class="fixed inset-0 bg-slate-100 sm:bg-slate-900 z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl sm:shadow-2xl w-full max-w-md flex flex-col justify-center relative overflow-hidden">
             
-            <div class="mx-auto mb-2 flex items-center justify-center p-2 w-fit">
-                <img src="JATA.jpg" alt="Logo KPDN" class="h-24 sm:h-32 object-contain bg-white p-2 rounded-xl shadow-sm border border-slate-100">
+            <div class="mx-auto mb-2 flex items-center justify-center bg-white p-2 w-fit rounded-xl shadow-sm border border-slate-100">
+                <img src="JATA.jpg" alt="Logo KPDN" class="h-24 sm:h-32 object-contain mix-blend-multiply">
             </div>
                  
             <p class="text-slate-600 text-[10px] sm:text-xs font-bold mb-6 uppercase leading-relaxed text-center">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -83,7 +83,7 @@
             <div class="space-y-5">
                 <div>
                     <label class="block text-xs font-extrabold text-slate-700 mb-2 uppercase">No Kad Pengenalan (Tanpa '-')</label>
-                    <input type="text" inputmode="numeric" id="loginIc" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 outline-none disabled:bg-slate-100 font-black tracking-[0.2em] text-center text-lg transition-colors" placeholder="CTH: 001020025021">
+                    <input type="text" inputmode="numeric" id="loginIc" oninput="this.value = this.value.replace(/[^0-9]/g, '')" class="w-full px-4 py-3.5 bg-slate-50 border-2 border-slate-200 rounded-xl focus:bg-white focus:border-blue-600 outline-none disabled:bg-slate-100 font-black tracking-[0.2em] text-center text-lg transition-colors uppercase" placeholder="CTH: 001020025021">
                 </div>
                 <button id="btnLogin" onclick="window.handleLogin()" class="w-full bg-blue-700 hover:bg-blue-800 active:bg-blue-900 text-white font-bold py-4 px-4 rounded-xl shadow-lg transition-all text-sm uppercase tracking-widest">
                     Log Masuk
@@ -102,7 +102,7 @@
     </div>
 
     <!-- MAIN APP CONTAINER -->
-    <main id="appContainer" class="hidden flex-1 w-full max-w-7xl mx-auto p-3 sm:p-6 pb-20">
+    <main id="appContainer" class="hidden flex-1 w-full max-w-7xl mx-auto p-3 sm:p-6 pb-20 uppercase">
         
         <!-- TOAST NOTIFICATION -->
         <div id="toast" class="fixed bottom-4 left-4 right-4 sm:top-4 sm:bottom-auto sm:left-auto sm:right-4 transform translate-y-[250%] sm:translate-y-[-250%] sm:translate-x-full transition-all duration-500 z-[200] opacity-0 pointer-events-none">
@@ -134,19 +134,19 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-500 uppercase mb-1.5">Nama Pegawai</label>
-                        <input type="text" id="pemohonNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 input-upper" readonly>
+                        <input type="text" id="pemohonNama" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase" readonly>
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-500 uppercase mb-1.5">No Kad Pengenalan</label>
-                        <input type="text" id="pemohonIc" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 input-upper" readonly>
+                        <input type="text" id="pemohonIc" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase" readonly>
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-500 uppercase mb-1.5">Jawatan</label>
-                        <input type="text" id="pemohonJawatan" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 input-upper" readonly>
+                        <input type="text" id="pemohonJawatan" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase" readonly>
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-500 uppercase mb-1.5">Tempat Bertugas</label>
-                        <input type="text" id="pemohonTempat" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 input-upper" readonly>
+                        <input type="text" id="pemohonTempat" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase" readonly>
                     </div>
                 </div>
             </div>
@@ -186,18 +186,18 @@
 
                     <div class="relative">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Carian Jenis Kesalahan <span class="text-red-500">*</span></label>
-                        <input type="text" id="carianJenisInput" oninput="this.value = this.value.toUpperCase(); window.cariKesalahan();" placeholder="TAIP KATA KUNCI KESALAHAN (CTH: LESEN, HARGA)..." class="w-full bg-white border border-blue-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="carianJenisInput" oninput="window.cariKesalahan();" placeholder="TAIP KATA KUNCI KESALAHAN..." class="w-full bg-white border border-blue-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
                         <ul id="carianJenisHasil" class="bg-white border border-slate-200 rounded-xl shadow-2xl max-h-48 overflow-y-auto hidden absolute z-[60] w-full mt-2 divide-y divide-slate-100"></ul>
                     </div>
 
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Jenis / Butiran Kesalahan (Auto)</label>
-                        <textarea id="jenisKesalahan" rows="3" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-600 leading-relaxed outline-none transition-colors" style="resize: none; overflow: hidden; word-wrap: break-word; min-height: 80px;" placeholder="SILA BUAT CARIAN DI ATAS..."></textarea>
+                        <textarea id="jenisKesalahan" rows="3" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase text-slate-600 leading-relaxed outline-none transition-colors" style="resize: none; overflow: hidden; word-wrap: break-word; min-height: 80px;" placeholder="SILA BUAT CARIAN DI ATAS..."></textarea>
                     </div>
 
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Seksyen Kesalahan (Auto)</label>
-                        <input type="text" id="seksyenKesalahan" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-600 outline-none transition-colors" placeholder="AUTO ISI">
+                        <input type="text" id="seksyenKesalahan" readonly class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase text-slate-600 outline-none transition-colors" placeholder="AUTO ISI">
                     </div>
                 </div>
             </div>
@@ -208,12 +208,12 @@
                 <div class="space-y-4 mb-5">
                     <div class="relative">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Carian Nama Pegawai</label>
-                        <input type="text" id="carianNamaInput" oninput="this.value = this.value.toUpperCase(); window.cariPegawai();" placeholder="TAIP NAMA ATAU IC..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="carianNamaInput" oninput="window.cariPegawai();" placeholder="TAIP NAMA ATAU IC..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
                         <ul id="carianHasil" class="bg-white border border-slate-200 rounded-xl shadow-2xl max-h-48 overflow-y-auto hidden absolute z-[60] w-full mt-2 divide-y divide-slate-100"></ul>
                     </div>
                     <div id="ruangTugasan">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Tugasan (Opsional)</label>
-                        <select id="pilihanTugasan" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></select>
+                        <select id="pilihanTugasan" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase text-slate-800 focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></select>
                     </div>
                     <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3 pt-2">
                         <button onclick="window.tambahPasukan()" class="bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold shadow-md uppercase w-full sm:flex-1 tracking-wider transition-all">Tambah Anggota</button>
@@ -243,15 +243,15 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Nama Syarikat / Premis <span class="text-red-500">*</span></label>
-                        <input type="text" id="premisNama" oninput="this.value = this.value.toUpperCase()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="premisNama" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">No Pendaftaran (SSM)</label>
-                        <input type="text" id="premisSsm" oninput="this.value = this.value.toUpperCase()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="premisSsm" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Alamat Premis <span class="text-red-500">*</span></label>
-                        <textarea id="premisAlamat" rows="2" oninput="this.value = this.value.toUpperCase(); window.autoResize(this);" style="min-height:60px;" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></textarea>
+                        <textarea id="premisAlamat" rows="2" oninput="window.autoResize(this);" style="min-height:60px;" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></textarea>
                     </div>
                 </div>
                 
@@ -259,16 +259,16 @@
                     <h4 id="labelOkkOkt" class="text-xs sm:text-sm font-black text-slate-800 uppercase border-b border-slate-200 pb-2">Maklumat Orang Kena Kompaun (OKK)</h4>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-600 mb-1.5 uppercase">Nama Penuh Individu <span class="text-red-500">*</span></label>
-                        <input type="text" id="okkNama" oninput="this.value = this.value.toUpperCase()" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="okkNama" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-[10px] sm:text-xs font-bold text-slate-600 mb-1.5 uppercase">No. Kad Pengenalan <span class="text-red-500">*</span></label>
-                            <input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="12" id="okkIc" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 tracking-wider outline-none transition-colors">
+                            <input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="12" id="okkIc" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 tracking-wider outline-none transition-colors">
                         </div>
                         <div>
                             <label class="block text-[10px] sm:text-xs font-bold text-slate-600 mb-1.5 uppercase">Jawatan <span class="text-red-500">*</span></label>
-                            <input type="text" id="okkJawatan" oninput="this.value = this.value.toUpperCase()" placeholder="CTH: PEMILIK / PEKERJA" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                            <input type="text" id="okkJawatan" placeholder="CTH: PEMILIK / PEKERJA" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
                         </div>
                     </div>
                 </div>
@@ -280,7 +280,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-emerald-800 mb-1.5 uppercase">Nilai Kompaun (RM) <span class="text-red-500">*</span></label>
-                        <input type="text" inputmode="decimal" id="kompaunNilai" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" class="w-full bg-white border border-emerald-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-black text-emerald-700 focus:ring-2 focus:ring-emerald-500 outline-none transition-colors">
+                        <input type="text" inputmode="decimal" id="kompaunNilai" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" class="w-full bg-white border border-emerald-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-black text-emerald-700 uppercase focus:ring-2 focus:ring-emerald-500 outline-none transition-colors">
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-emerald-800 mb-1.5 uppercase">Jenis Bayaran <span class="text-red-500">*</span></label>
@@ -288,7 +288,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-emerald-800 mb-1.5 uppercase">No Resit <span id="wajibResitBintang" class="text-red-500">*</span></label>
-                        <input type="text" id="kompaunResit" oninput="this.value = this.value.toUpperCase()" class="w-full bg-white border border-emerald-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-emerald-500 outline-none transition-colors">
+                        <input type="text" id="kompaunResit" class="w-full bg-white border border-emerald-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-emerald-500 outline-none transition-colors">
                     </div>
                 </div>
             </div>
@@ -299,7 +299,7 @@
                 <p class="text-[10px] sm:text-xs text-slate-600 mb-3 font-bold uppercase bg-blue-50 p-3 rounded-lg border border-blue-100 leading-relaxed">Format: Jenis Barang, Kuantiti, Nilai RM <br><span class="font-normal opacity-80">(Cth: GULA KASAR, 50 KG, 142.50)</span></p>
                 
                 <div class="flex flex-col space-y-3 mb-5">
-                    <textarea id="tampalSitaan" rows="3" oninput="this.value = this.value.toUpperCase(); window.autoResize(this);" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold focus:ring-2 focus:ring-blue-500 outline-none transition-colors" placeholder="TAIP ATAU TAMPAL DI SINI..." style="min-height:80px;"></textarea>
+                    <textarea id="tampalSitaan" rows="3" oninput="window.autoResize(this);" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" placeholder="TAIP ATAU TAMPAL DI SINI..." style="min-height:80px;"></textarea>
                     <button onclick="window.prosesSitaan()" class="self-end bg-slate-800 hover:bg-slate-900 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase w-full sm:w-auto tracking-widest shadow-md transition-all">Masuk Ke Jadual ⬇</button>
                 </div>
                 
@@ -340,18 +340,22 @@
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-5 border-b-2 border-slate-100 pb-4 space-y-4 sm:space-y-0">
                     <h3 class="font-black text-slate-800 text-base sm:text-xl uppercase flex items-center space-x-2">
                         <span class="bg-blue-100 text-blue-700 p-2 rounded-lg">📄</span>
-                        <span>Pratonton Laporan (Boleh Diedit)</span>
+                        <span>Pratonton Laporan</span>
                     </h3>
-                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto">
+                    
+                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto mt-3 sm:mt-0">
                         <button onclick="window.kemaskiniLaporan()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-xl shadow-md text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors">
                             <span>💾 SIMPAN PINDAAN</span>
+                        </button>
+                        <button onclick="window.hantarEmel()" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white font-black px-6 py-3.5 rounded-xl shadow-md text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors">
+                            <span>✉️ HANTAR KE EMEL</span>
                         </button>
                     </div>
                 </div>
                 
-                <p class="text-[10px] sm:text-xs text-red-500 font-bold mb-3 uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Anda boleh menyunting teks di dalam kotak ini. Tekan Simpan Pindaan untuk kemas kini pangkalan data Firebase.</p>
+                <p class="text-[10px] sm:text-xs text-red-500 font-bold mb-3 uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Anda boleh menyunting teks di dalam kotak ini. Tekan Simpan Pindaan untuk kemas kini pangkalan data.</p>
                 
-                <textarea id="pratontonTeks" rows="15" oninput="window.autoResize(this)" class="w-full whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed text-slate-800 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-300 font-semibold focus:ring-2 focus:ring-blue-500 outline-none transition-all" style="resize: none; overflow: hidden; min-height: 250px;"></textarea>
+                <textarea id="pratontonTeks" rows="15" oninput="window.autoResize(this)" class="w-full whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed text-slate-800 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-300 font-semibold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-all" style="resize: none; overflow: hidden; min-height: 250px;"></textarea>
             </div>
         </div>
 
@@ -390,8 +394,16 @@
         <div id="balai" class="tab-content">
             <div class="bg-white p-6 sm:p-10 rounded-2xl sm:rounded-3xl shadow-2xl border border-slate-200 max-w-3xl mx-auto text-center relative overflow-hidden my-4 sm:my-10">
                 
-                <div class="mx-auto mb-4 flex items-center justify-center p-2 w-fit">
-                    <img src="JATA.jpg" alt="Jata Negara" class="h-20 sm:h-24 object-contain bg-white p-2 rounded-xl shadow-sm border border-slate-100">
+                <!-- BUTANG KELUAR BALAI -->
+                <div class="absolute top-4 right-4 sm:top-6 sm:right-6">
+                    <button onclick="window.logout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-bold py-2 px-3 rounded-xl text-[10px] sm:text-xs uppercase tracking-widest transition-colors shadow-sm flex items-center space-x-1">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                        <span>Keluar</span>
+                    </button>
+                </div>
+
+                <div class="mx-auto mb-4 flex items-center justify-center bg-white p-2 w-fit rounded-xl shadow-sm border border-slate-100 mt-4 sm:mt-0">
+                    <img src="JATA.jpg" alt="Jata Negara" class="h-20 sm:h-24 object-contain mix-blend-multiply">
                 </div>
                 
                 <p class="text-slate-600 text-[10px] sm:text-xs font-extrabold mb-6 uppercase leading-relaxed text-center tracking-wide">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -401,7 +413,7 @@
                 <p class="text-slate-500 text-xs sm:text-sm font-bold mt-8 mb-4 uppercase">Masukkan Kod 5 Angka yang dijana oleh sistem.</p>
                 
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-3 mb-8 w-full max-w-xs mx-auto sm:max-w-none">
-                    <input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="carianKodBalai" class="w-full sm:w-64 bg-slate-50 border-2 border-slate-200 rounded-2xl px-4 py-4 text-3xl sm:text-4xl font-black tracking-[0.3em] text-center focus:bg-white focus:border-blue-600 outline-none text-slate-800 transition-colors" placeholder="12345" maxlength="5">
+                    <input type="text" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '');" id="carianKodBalai" class="w-full sm:w-64 bg-slate-50 border-2 border-slate-200 rounded-2xl px-4 py-4 text-3xl sm:text-4xl font-black tracking-[0.3em] text-center focus:bg-white focus:border-blue-600 outline-none text-slate-800 uppercase transition-colors" placeholder="12345" maxlength="5">
                     <div class="flex w-full sm:w-auto gap-2">
                         <button onclick="window.cariLaporanBalai()" class="flex-1 sm:flex-none bg-blue-700 hover:bg-blue-800 text-white font-black py-4.5 px-8 rounded-2xl shadow-lg uppercase text-sm sm:text-base tracking-wider transition-all">Cari</button>
                         <button onclick="window.resetBalai()" class="flex-1 sm:flex-none bg-slate-200 hover:bg-slate-300 text-slate-700 font-black py-4.5 px-6 rounded-2xl uppercase text-sm sm:text-base tracking-wider transition-all">Reset</button>
@@ -419,7 +431,7 @@
                         </button>
                     </div>
                     <div class="p-5 sm:p-8 bg-slate-50">
-                        <pre id="teksLaporanBalai" class="whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed text-slate-800 break-words font-bold"></pre>
+                        <pre id="teksLaporanBalai" class="whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed text-slate-800 break-words font-bold uppercase"></pre>
                     </div>
                 </div>
             </div>
@@ -440,8 +452,9 @@
         import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, addDoc, collection, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Global Environment Defaults for the Immersive App
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'kpdn-ereport-app';
+        
+        // KONFIGURASI FIREBASE ANDA
         const firebaseConfig = {
           apiKey: "AIzaSyB-Q3f_ruLdfJcKPPpfgYi0oG0VPm-RffM",
           authDomain: "ereportkpdn-2026.firebaseapp.com",
@@ -450,19 +463,21 @@
           messagingSenderId: "739981813341",
           appId: "1:739981813341:web:d9a0e4dcf5b8c54b5ecfb4"
         };
+        
         const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // Strict Paths Enforcement
         const basePath = `artifacts/${appId}/public/data`;
         const laporanCol = collection(db, basePath, 'laporan');
         const settingsDoc = doc(db, basePath, 'settings', 'config');
 
         let DB = { users: {}, pegawai: [], tugasan: [], ksAkta: [], kodKawasan: [], kesalahan: [], jenisBayar: [] };
-        const SUPER_ADMIN_FALLBACK = { ic: "01944442825025", namaPenuh: "SUPER ADMIN", jawatanSingkatan: "ADMIN", namaJawatanPenuh: "PENGURUS SISTEM", tempatBertugas: "IBU PEJABAT KPDN", isAdmin: true };
+        
+        // KUNCI KEKAL SUPER ADMIN (STATUS: AKTIF)
+        const SUPER_ADMIN_FALLBACK = { ic: "01944442825025", namaPenuh: "SUPER ADMIN", jawatanSingkatan: "ADMIN", namaJawatanPenuh: "PENGURUS SISTEM", tempatBertugas: "IBU PEJABAT KPDN", isAdmin: true, peranan: "ADMIN", isAktif: true, status: "AKTIF" };
         
         let currentUser = null;
         let currentMode = 'cots'; 
@@ -472,18 +487,6 @@
         let kesalahanDipilih = null;
         let editModeKod = null; 
         let editModeDocId = null; 
-
-        const defaultSettings = {
-           pegawai: [SUPER_ADMIN_FALLBACK],
-           tugasan: ["PEGAWAI SERBUAN", "JURUGAMBAR", "PELUKIS PELAN", "PEGAWAI PENGIRING"],
-           ksAkta: ["KHA", "KPD", "KHM", "CAP DAGANGAN"],
-           kodKawasan: ["PNG", "KDH", "PRK", "SEL", "WPKL"],
-           kesalahan: [
-               {akta: "AKTA KAWALAN HARGA DAN ANTIPENCATUTAN 2011", seksyen: "SEKSYEN 11", jenis: "TIDAK MELETAKKAN TANDA HARGA"},
-               {akta: "AKTA TIMBANG DAN SUKAT 1972", seksyen: "SEKSYEN 14", jenis: "MENGGUNAKAN ALAT TIMBANG TIDAK DITENTUSAHKAN"}
-           ],
-           jenisBayar: ["TUNAI", "IPAYMENT", "TAWARAN 14 HARI"]
-        };
 
         function setLoader(state, text = "Sedang Memproses...") {
             let loader = document.getElementById('globalLoader');
@@ -540,11 +543,8 @@
 
         async function authenticate() {
             try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                if (initialAuthToken) { await signInWithCustomToken(auth, initialAuthToken); } 
+                else { await signInAnonymously(auth); }
             } catch (err) {
                 console.error("Auth Error:", err);
                 showModal("Ralat Autentikasi", "Gagal mengesahkan sesi Firebase.");
@@ -561,35 +561,48 @@
                 const snap = await getDoc(settingsDoc);
                 if (snap.exists()) {
                     let data = snap.data();
-                    DB.pegawai = data.pegawai || [SUPER_ADMIN_FALLBACK];
-                    DB.tugasan = data.tugasan || defaultSettings.tugasan;
-                    DB.ksAkta = data.ksAkta || defaultSettings.ksAkta;
-                    DB.kodKawasan = data.kodKawasan || defaultSettings.kodKawasan;
-                    DB.kesalahan = data.kesalahan || defaultSettings.kesalahan;
-                    DB.jenisBayar = data.jenisBayar || defaultSettings.jenisBayar;
+                    DB.pegawai = data.pegawai || [];
+                    DB.tugasan = data.tugasan || ["PEGAWAI SERBUAN", "JURUGAMBAR", "PELUKIS PELAN", "PEGAWAI PENGIRING"];
+                    DB.ksAkta = data.ksAkta || ["KHA", "KPD", "KHM", "CAP DAGANGAN"];
+                    DB.kodKawasan = data.kodKawasan || ["PNG", "KDH", "PRK", "SEL", "WPKL"];
+                    DB.kesalahan = data.kesalahan || [];
+                    DB.jenisBayar = data.jenisBayar || ["TUNAI", "IPAYMENT", "TAWARAN 14 HARI"];
                 } else {
-                    // Seed defaults if empty
-                    await setDoc(settingsDoc, defaultSettings);
-                    Object.assign(DB, defaultSettings);
+                    Object.assign(DB, { tugasan: ["PEGAWAI SERBUAN", "JURUGAMBAR"], ksAkta: ["KHA"], kodKawasan: ["PNG"], kesalahan: [], jenisBayar: ["TUNAI", "IPAYMENT", "TAWARAN 14 HARI"] });
                 }
                 
-                // Map to users dict
                 DB.users = {};
+                
+                // Susun Senarai Pegawai dari Firebase
                 DB.pegawai.forEach(p => {
                     let icStr = String(p.ic || "").replace(/[^0-9]/g, '');
                     icStr = ("000000000000" + icStr).slice(-12);
+                    
+                    // Paksa Super Admin Kekal Jadi Admin Walaupun Ditimpa CSV
+                    if(icStr === "944442825025") { 
+                        p.isAdmin = true; 
+                        p.peranan = "ADMIN";
+                        p.isAktif = true; 
+                        p.status = "AKTIF";
+                    }
+                    
                     DB.users[icStr] = p;
                 });
                 
-                // Ensure Super Admin is always there
-                DB.users["01944442825025"] = SUPER_ADMIN_FALLBACK;
+                // Jika IC Super Admin Langsung Tiada Dalam Sistem, Masukkan Secara Paksa
+                if(!DB.users["944442825025"]) {
+                    let adminTulen = {...SUPER_ADMIN_FALLBACK};
+                    adminTulen.ic = "944442825025";
+                    DB.users["944442825025"] = adminTulen;
+                    DB.pegawai.push(adminTulen);
+                }
 
                 setupDropdowns();
                 renderAdminData();
             } catch(err) {
                 console.error("Fetch DB Error:", err);
-                DB.users = { "01944442825025": SUPER_ADMIN_FALLBACK };
-                DB.pegawai = Object.values(DB.users);
+                DB.users = { "944442825025": SUPER_ADMIN_FALLBACK };
+                DB.pegawai = [SUPER_ADMIN_FALLBACK];
                 DB.jenisBayar = ["TUNAI", "IPAYMENT", "TAWARAN 14 HARI"];
                 showModal("Amaran Rangkaian", "Gagal berhubung dengan Firebase. Sila muat semula halaman.");
             } finally {
@@ -611,7 +624,7 @@
             
             document.getElementById('kompaunBayar').addEventListener('change', function() {
                 let reqStar = document.getElementById('wajibResitBintang');
-                if (this.value === 'TAWARAN 14 HARI') { reqStar.classList.add('hidden'); } 
+                if (this.value.toUpperCase() === 'TAWARAN 14 HARI') { reqStar.classList.add('hidden'); } 
                 else { reqStar.classList.remove('hidden'); }
             });
         }
@@ -626,6 +639,13 @@
                 currentUser = DB.users[icStr];
                 currentUser.ic = icStr; 
                 
+                // Semak Status Akaun Aktif/Tidak Aktif
+                let akaunStatus = currentUser.status || (currentUser.isAktif === false ? 'TIDAK AKTIF' : 'AKTIF');
+                if(akaunStatus === 'TIDAK AKTIF') {
+                    currentUser = null;
+                    return showModal("Akses Ditolak", "Akaun anda telah digantung atau berstatus TIDAK AKTIF. Sila hubungi Admin sistem.");
+                }
+                
                 let currNama = currentUser.namaPenuh || currentUser.nama || "PEGAWAI";
                 let currJaw = currentUser.jawatanSingkatan || currentUser.jawatan || "JAWATAN";
                 let currTempat = currentUser.tempatBertugas || currentUser.tempat || "LOKASI";
@@ -636,7 +656,8 @@
                 document.getElementById('pemohonJawatan').value = currJaw;
                 document.getElementById('pemohonTempat').value = currTempat;
 
-                if(currentUser.isAdmin) document.getElementById('nav-admin').classList.remove('hidden');
+                let isAdminCheck = (currentUser.peranan === 'ADMIN' || currentUser.isAdmin === true);
+                if(isAdminCheck) document.getElementById('nav-admin').classList.remove('hidden');
                 else document.getElementById('nav-admin').classList.add('hidden');
 
                 document.getElementById('loginOverlay').classList.add('hidden');
@@ -882,7 +903,8 @@
         }
 
         function prosesSitaan() {
-            let lines = document.getElementById('tampalSitaan').value.toUpperCase().split('\n');
+            let val = document.getElementById('tampalSitaan').value;
+            let lines = val.toUpperCase().split('\n');
             lines.forEach(line => {
                 let col = line.split(',');
                 if(col.length >= 2) {
@@ -937,7 +959,7 @@
             if(!document.getElementById('okkIc').value) return showModal("Borang Tidak Lengkap", "Sila masukkan No. Kad Pengenalan Individu.");
             if(!document.getElementById('okkJawatan').value) return showModal("Borang Tidak Lengkap", "Sila masukkan Jawatan Individu tersebut.");
 
-            let bayarType = document.getElementById('kompaunBayar').value;
+            let bayarType = document.getElementById('kompaunBayar').value.toUpperCase();
 
             if(currentMode === 'cots') {
                 if(!document.getElementById('kompaunNilai').value) return showModal("Borang Tidak Lengkap", "Sila masukkan Nilai Kompaun (COTS).");
@@ -999,11 +1021,16 @@
             let teks = "";
 
             if(currentMode === 'cots') {
-                let resitText = dt.kBayar !== 'TAWARAN 14 HARI' ? `DAN RESIT KEWANGAN BERNOMBOR ${dt.kResit} TELAH DIKELUARKAN BERHUBUNG DENGAN KESALAHAN TERSEBUT DAN TELAH DITANDATANGANI` : `TELAH DIKELUARKAN BERHUBUNG DENGAN KESALAHAN TERSEBUT DAN TELAH DITANDATANGANI (TAWARAN 14 HARI)`;
+                let dokumenDiserah = "";
+                if (dt.kBayar === 'TAWARAN 14 HARI') {
+                    dokumenDiserah = `SESALINAN KENYATAAN PEMERIKSAAN DAN TAWARAN KOMPAUN TELAH DIKELUARKAN BERHUBUNG DENGAN KESALAHAN TERSEBUT DAN TELAH DITANDATANGANI.`;
+                } else {
+                    dokumenDiserah = `SESALINAN KENYATAAN PEMERIKSAAN, TAWARAN KOMPAUN DAN AKUAN PENERIMAAN KOMPAUN SERTA RESIT KEWANGAN BERNOMBOR ${dt.kResit} TELAH DIKELUARKAN BERHUBUNG DENGAN KESALAHAN TERSEBUT DAN TELAH DITANDATANGANI.`;
+                }
                 
                 teks = `PADA ${tStr} @ ${dt.masa} HRS, SEPASUKAN PEGAWAI PENGUATKUASA DARI ${tmptPapar.toUpperCase()} ${gabung} TELAH MELAKUKAN PEMERIKSAAN DI PREMIS TETAP BERALAMAT DI ${dt.pNama}, ${dt.pAlamat} DAN DALAM MENJALANKAN KUASA-KUASA YANG DIBERIKAN KEPADA SAYA DI BAWAH ${dt.akta} TELAH MENDAPATI SUATU KESALAHAN TELAH DILAKUKAN DI BAWAH ${dt.sek} ${dt.akta} IAITU ${dt.jenis}${sitaanAyat}.
 
-TINDAKAN KOMPAUN SERTA MERTA (COTS) TELAH DIAMBIL KE ATAS ORANG YANG BERTANGGUNGJAWAB PADA MASA ITU IAITU ${dt.oNama} BERNOMBOR KAD PENGENALAN ${dt.oIc} YANG MENGAKU SEBAGAI ${dt.oJaw} SEBANYAK RM ${dt.kNilai} MELALUI KAEDAH ${dt.kBayar}. SESALINAN KENYATAAN PEMERIKSAAN, TAWARAN KOMPAUN, AKUAN PENERIMAAN KOMPAUN ${resitText}.
+TINDAKAN KOMPAUN SERTA MERTA (COTS) TELAH DIAMBIL KE ATAS ORANG YANG BERTANGGUNGJAWAB PADA MASA ITU IAITU ${dt.oNama} BERNOMBOR KAD PENGENALAN ${dt.oIc} YANG MENGAKU SEBAGAI ${dt.oJaw} SEBANYAK RM ${dt.kNilai} MELALUI KAEDAH ${dt.kBayar}. ${dokumenDiserah}
 
 SIASATAN DAN TINDAKAN SELANJUTNYA SEDANG DIJALANKAN OLEH BAHAGIAN PENGUATKUASA, ${tmptPapar.toUpperCase()}.`;
 
@@ -1025,6 +1052,8 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
         }
 
         async function janaLaporan() {
+            if(!auth.currentUser) return showModal("Ralat Auth", "Anda perlu di log masuk untuk menjana laporan.");
+            
             setLoader(true, "Merekodkan ke Firebase...");
             
             let teks = formatTeks();
@@ -1037,7 +1066,6 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
                 premis: document.getElementById('premisNama').value.toUpperCase(),
                 teksLaporan: teks,
                 tarikhMasuk: new Date().toISOString(),
-                // Extra raw data
                 tarikh: document.getElementById('tarikhKes').value.toUpperCase(),
                 masa: document.getElementById('masaKes').value.toUpperCase(),
                 ksFull: `${document.getElementById('ksAkta').value}-${document.getElementById('ksTahun').value}-${document.getElementById('ksSiri').value}-${document.getElementById('ksKawasan').value}`.toUpperCase()
@@ -1085,6 +1113,21 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             } finally {
                 setLoader(false);
             }
+        }
+
+        function hantarEmel() {
+            let teks = document.getElementById('pratontonTeks').value;
+            let kod = editModeKod || "TIADA KOD";
+            
+            if(!teks) {
+                showModal("Perhatian", "Tiada teks laporan untuk dihantar.");
+                return;
+            }
+            
+            let subject = encodeURIComponent("Laporan e-Report KPDN - Kod Akses: " + kod);
+            let body = encodeURIComponent(teks);
+            
+            window.location.href = "mailto:?subject=" + subject + "&body=" + body;
         }
 
         async function muatSejarah() {
@@ -1146,15 +1189,12 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             setLoader(true, "Mencari Laporan...");
             
             try {
-                // Ensure authentication for public read
                 if(!auth.currentUser) await authenticate();
 
                 const snap = await getDocs(laporanCol);
                 let found = null;
                 snap.forEach(doc => {
-                    if(doc.data().kodUnik === kodCari) {
-                        found = doc.data();
-                    }
+                    if(doc.data().kodUnik === kodCari) { found = doc.data(); }
                 });
 
                 let paparan = document.getElementById('paparanLaporanBalai');
@@ -1209,16 +1249,29 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
                     for (let i = 1; i < lines.length; i++) {
                         let line = lines[i].trim();
                         if (!line) continue;
-                        // Basic CSV parse splitting by commas outside quotes
                         let cols = line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
 
                         if (kategori === 'pegawai' && cols.length >= 5) {
+                            
+                            // Logik Pengecaman Format Baharu (Peranan & Status)
+                            let perananStr = cols[5] ? cols[5].trim().replace(/['"]/g, '').toUpperCase() : 'PENGGUNA';
+                            let statusStr = cols[6] ? cols[6].trim().replace(/['"]/g, '').toUpperCase() : 'AKTIF';
+                            
+                            // Logik keserasian jika format lama digunakan (YA / TIADA)
+                            if (perananStr === 'YA') perananStr = 'ADMIN';
+                            if (perananStr !== 'ADMIN' && perananStr !== 'PENGGUNA') perananStr = 'PENGGUNA';
+                            if (statusStr !== 'AKTIF' && statusStr !== 'TIDAK AKTIF') statusStr = 'AKTIF';
+
                             parsedArray.push({
                                 ic: cols[0].trim().replace(/['"]/g, '').toUpperCase(),
                                 namaPenuh: cols[1].trim().replace(/['"]/g, '').toUpperCase(),
                                 jawatanSingkatan: cols[2].trim().replace(/['"]/g, '').toUpperCase(),
                                 namaJawatanPenuh: cols[3].trim().replace(/['"]/g, '').toUpperCase(),
-                                tempatBertugas: cols[4].trim().replace(/['"]/g, '').toUpperCase()
+                                tempatBertugas: cols[4].trim().replace(/['"]/g, '').toUpperCase(),
+                                peranan: perananStr,
+                                isAdmin: perananStr === 'ADMIN',
+                                status: statusStr,
+                                isAktif: statusStr === 'AKTIF'
                             });
                         } 
                         else if (kategori === 'kesalahan' && cols.length >= 3) {
@@ -1248,17 +1301,12 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
         async function hantarDataAdminKePelayan(kategori, dataArray) {
             setLoader(true, "Mengemas kini Firebase...");
             try {
-                // Ensure auth
                 if(!auth.currentUser) await authenticate();
                 
-                // Get current settings
                 const snap = await getDoc(settingsDoc);
-                let settings = snap.exists() ? snap.data() : Object.assign({}, defaultSettings);
+                let settings = snap.exists() ? snap.data() : { tugasan: [], ksAkta: [], kodKawasan: [], kesalahan: [], jenisBayar: [] };
                 
-                // Update specific category
                 settings[kategori] = dataArray;
-                
-                // Save back to Firestore
                 await setDoc(settingsDoc, settings);
                 
                 showToast("Berjaya dikemas kini!");
@@ -1274,7 +1322,7 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
 
         function muatTurunCSV(kategori) {
             let csvContent = "data:text/csv;charset=utf-8,";
-            if (kategori === 'pegawai') csvContent += "NoKadPengenalan,NamaPenuh,JawatanSingkatan,NamaJawatanPenuh,TempatBertugas\n";
+            if (kategori === 'pegawai') csvContent += "NoKadPengenalan,NamaPenuh,JawatanSingkatan,NamaJawatanPenuh,TempatBertugas,Peranan(ADMIN/PENGGUNA),Status(AKTIF/TIDAK AKTIF)\n";
             else if (kategori === 'tugasan') csvContent += "Nama Tugasan\n";
             else if (kategori === 'ksAkta') csvContent += "Kod Kertas Siasatan\n";
             else if (kategori === 'kodKawasan') csvContent += "Kod Kawasan\n";
@@ -1295,7 +1343,19 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             container.innerHTML = '';
             
             let sections = [
-                { id: 'pegawai', tajuk: '1. Pangkalan Data Pegawai', data: DB.pegawai.map(p => `${p.namaPenuh || p.nama} (${p.ic}) - ${p.jawatanSingkatan || p.jawatan}`) },
+                { id: 'pegawai', tajuk: '1. Pangkalan Data Pegawai', data: DB.pegawai.map(p => {
+                    let per = p.peranan || (p.isAdmin ? 'ADMIN' : 'PENGGUNA');
+                    let stat = p.status || (p.isAktif === false ? 'TIDAK AKTIF' : 'AKTIF');
+                    let perColor = per === 'ADMIN' ? 'text-amber-600 bg-amber-50' : 'text-slate-500 bg-slate-100';
+                    let statColor = stat === 'AKTIF' ? 'text-emerald-600 bg-emerald-50' : 'text-red-600 bg-red-50';
+                    return `<div class="flex flex-col sm:flex-row justify-between sm:items-center w-full gap-2">
+                                <span class="truncate pr-2">${p.namaPenuh || p.nama} (${p.ic}) - ${p.jawatanSingkatan || p.jawatan}</span>
+                                <div class="flex space-x-2 flex-shrink-0">
+                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold ${perColor}">${per}</span>
+                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold ${statColor}">${stat}</span>
+                                </div>
+                            </div>`;
+                }) },
                 { id: 'tugasan', tajuk: '2. Senarai Tugasan Pasukan', data: DB.tugasan },
                 { id: 'ksAkta', tajuk: '3. Kod Akta (Kertas Siasatan)', data: DB.ksAkta },
                 { id: 'kodKawasan', tajuk: '4. Kod Kawasan Cawangan', data: DB.kodKawasan },
@@ -1316,7 +1376,7 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
                             <h3 class="font-black text-slate-800 uppercase tracking-tight text-sm sm:text-lg">${sec.tajuk}</h3>
                             <div class="flex space-x-2 w-full sm:w-auto">
                                 <button onclick="window.muatTurunCSV('${sec.id}')" class="flex-1 sm:flex-none text-[10px] sm:text-xs bg-slate-200 text-slate-700 px-4 py-3 sm:px-5 sm:py-2.5 rounded-xl font-black transition hover:bg-slate-300 uppercase tracking-widest">↓ Muat Turun Template</button>
-                                <button onclick="window.muatNaikCSV('${sec.id}')" class="flex-1 sm:flex-none text-[10px] sm:text-xs bg-emerald-600 text-white px-4 py-3 sm:px-5 sm:py-2.5 rounded-xl font-black transition shadow-md hover:bg-emerald-700 uppercase tracking-widest">↑ Muat Naik CSV (Ganti Data)</button>
+                                <button onclick="window.muatNaikCSV('${sec.id}')" class="flex-1 sm:flex-none text-[10px] sm:text-xs bg-emerald-600 text-white px-4 py-3 sm:px-5 sm:py-2.5 rounded-xl font-black transition shadow-md hover:bg-emerald-700 uppercase tracking-widest">↑ Muat Naik CSV</button>
                             </div>
                         </div>
                         <ul class="max-h-64 overflow-y-auto pr-2 styled-scrollbar">${listHTML || '<li class="text-[10px] sm:text-xs text-slate-400 italic font-bold p-6 text-center bg-slate-50 rounded-xl">Tiada rekod dijumpai.</li>'}</ul>
@@ -1360,6 +1420,7 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
         window.buangSitaan = buangSitaan;
         window.semakDanJanaLaporan = semakDanJanaLaporan;
         window.kemaskiniLaporan = kemaskiniLaporan;
+        window.hantarEmel = hantarEmel;
         window.muatSejarah = muatSejarah;
         window.cariLaporanBalai = cariLaporanBalai;
         window.salinLaporanBalai = salinLaporanBalai;
