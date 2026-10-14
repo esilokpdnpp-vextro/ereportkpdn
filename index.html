@@ -36,7 +36,7 @@
         <p id="loaderText" class="font-bold tracking-widest uppercase text-center px-4">Sedang Menghubungi Pelayan...</p>
     </div>
 
-    <!-- MODAL -->
+    <!-- MODAL AMARAN/INFO -->
     <div id="customModal" class="fixed inset-0 bg-slate-900 bg-opacity-75 z-[150] flex items-center justify-center hidden px-4">
         <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center transform transition-all">
             <h3 id="modalTitle" class="text-xl font-bold text-slate-800 mb-2 uppercase">Tajuk</h3>
@@ -45,13 +45,26 @@
         </div>
     </div>
 
+    <!-- MODAL BACA TEKS LAPORAN (KHAS ADMIN) -->
+    <div id="modalPaparTeks" class="fixed inset-0 bg-slate-900 bg-opacity-75 z-[160] flex items-center justify-center hidden px-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 max-w-2xl w-full flex flex-col max-h-[90vh]">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-100 pb-3">
+                <h3 class="text-base sm:text-lg font-black text-slate-800 uppercase flex items-center"><span class="bg-slate-800 text-white p-1.5 rounded-lg mr-2 text-xs">📄</span> Salinan Dokumen</h3>
+                <button onclick="document.getElementById('modalPaparTeks').classList.add('hidden')" class="text-red-600 font-bold bg-red-50 px-4 py-2 rounded-xl hover:bg-red-100 uppercase text-xs tracking-wider transition-colors">Tutup</button>
+            </div>
+            <div class="overflow-y-auto flex-1 bg-slate-50 p-4 sm:p-5 rounded-xl border border-slate-200">
+                <pre id="kandunganTeksPapar" class="whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed font-bold text-slate-700 uppercase break-words"></pre>
+            </div>
+        </div>
+    </div>
+
     <!-- HEADER -->
     <header class="bg-slate-800 text-white shadow-md hidden sticky top-0 z-40" id="mainHeader">
         <div class="w-full max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row items-center justify-between p-3 md:px-6 md:h-16 space-y-3 md:space-y-0">
                 <div class="flex items-center space-x-3 w-full md:w-auto justify-center md:justify-start">
-                    <div class="flex items-center justify-center bg-white p-1 rounded-md shadow-sm">
-                        <img src="JATA.jpg" alt="Logo KPDN" class="h-10 md:h-12 object-contain">
+                    <div class="flex items-center justify-center bg-transparent p-0 rounded-md shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg" alt="Logo KPDN" class="h-10 md:h-12 object-contain mix-blend-screen opacity-90">
                     </div>
                     <div class="text-center md:text-left flex-1">
                         <h1 class="text-sm md:text-lg font-bold uppercase tracking-wide leading-tight">SISTEM E-REPORT KPDN</h1>
@@ -59,11 +72,14 @@
                     </div>
                 </div>
                 
-                <nav class="flex w-full md:w-auto overflow-x-auto gap-2 pb-1 md:pb-0 justify-center hide-scrollbar">
+                <nav class="flex w-full md:w-auto overflow-x-auto gap-2 pb-1 md:pb-0 justify-center hide-scrollbar items-center">
                     <button onclick="window.switchTab('dashboard')" id="nav-dashboard" class="nav-btn flex-shrink-0 px-4 py-2 rounded-lg bg-blue-600 text-[11px] sm:text-sm font-bold transition uppercase">Borang</button>
                     <button onclick="window.switchTab('sejarah')" id="nav-sejarah" class="nav-btn flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-[11px] sm:text-sm font-bold transition uppercase">Sejarah</button>
+                    
+                    <button onclick="window.switchTab('admin-laporan')" id="nav-admin-laporan" class="nav-btn hidden flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-purple-400 text-[11px] sm:text-sm font-bold transition uppercase">Pemantauan</button>
                     <button onclick="window.switchTab('admin')" id="nav-admin" class="nav-btn hidden flex-shrink-0 px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-yellow-400 text-[11px] sm:text-sm font-bold transition uppercase">Admin</button>
-                    <button onclick="window.logout()" class="flex-shrink-0 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-[11px] sm:text-sm font-bold transition uppercase">Keluar</button>
+                    
+                    <button onclick="window.logout()" class="flex-shrink-0 px-4 py-2 rounded-lg bg-red-600 hover:bg-red-700 text-white text-[11px] sm:text-sm font-bold transition uppercase ml-2">Keluar</button>
                 </nav>
             </div>
         </div>
@@ -73,8 +89,8 @@
     <div id="loginOverlay" class="fixed inset-0 bg-slate-100 sm:bg-slate-900 z-50 flex items-center justify-center p-4">
         <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl sm:shadow-2xl w-full max-w-md flex flex-col justify-center relative overflow-hidden">
             
-            <div class="mx-auto mb-2 flex items-center justify-center bg-white p-2 w-fit rounded-xl shadow-sm border border-slate-100">
-                <img src="JATA.jpg" alt="Logo KPDN" class="h-24 sm:h-32 object-contain mix-blend-multiply">
+            <div class="mx-auto mb-2 flex items-center justify-center bg-transparent p-0 w-fit">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg" alt="Logo KPDN" class="h-24 sm:h-32 object-contain mix-blend-multiply">
             </div>
                  
             <p class="text-slate-600 text-[10px] sm:text-xs font-bold mb-6 uppercase leading-relaxed text-center">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -186,7 +202,7 @@
 
                     <div class="relative">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Carian Jenis Kesalahan <span class="text-red-500">*</span></label>
-                        <input type="text" id="carianJenisInput" oninput="window.cariKesalahan();" placeholder="TAIP KATA KUNCI KESALAHAN..." class="w-full bg-white border border-blue-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="carianJenisInput" oninput="window.cariKesalahan();" placeholder="TAIP KATA KUNCI KESALAHAN..." class="w-full bg-white border border-blue-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" style="text-transform: uppercase;">
                         <ul id="carianJenisHasil" class="bg-white border border-slate-200 rounded-xl shadow-2xl max-h-48 overflow-y-auto hidden absolute z-[60] w-full mt-2 divide-y divide-slate-100"></ul>
                     </div>
 
@@ -208,7 +224,7 @@
                 <div class="space-y-4 mb-5">
                     <div class="relative">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Carian Nama Pegawai</label>
-                        <input type="text" id="carianNamaInput" oninput="window.cariPegawai();" placeholder="TAIP NAMA ATAU IC..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="carianNamaInput" oninput="window.cariPegawai();" placeholder="TAIP NAMA ATAU IC..." class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" style="text-transform: uppercase;">
                         <ul id="carianHasil" class="bg-white border border-slate-200 rounded-xl shadow-2xl max-h-48 overflow-y-auto hidden absolute z-[60] w-full mt-2 divide-y divide-slate-100"></ul>
                     </div>
                     <div id="ruangTugasan">
@@ -243,15 +259,15 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Nama Syarikat / Premis <span class="text-red-500">*</span></label>
-                        <input type="text" id="premisNama" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="premisNama" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" style="text-transform: uppercase;">
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">No Pendaftaran (SSM)</label>
-                        <input type="text" id="premisSsm" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="premisSsm" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" style="text-transform: uppercase;">
                     </div>
                     <div class="sm:col-span-2">
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-700 mb-1.5 uppercase">Alamat Premis <span class="text-red-500">*</span></label>
-                        <textarea id="premisAlamat" rows="2" oninput="window.autoResize(this);" style="min-height:60px;" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></textarea>
+                        <textarea id="premisAlamat" rows="2" oninput="window.autoResize(this);" style="min-height:60px; text-transform: uppercase;" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors"></textarea>
                     </div>
                 </div>
                 
@@ -259,7 +275,7 @@
                     <h4 id="labelOkkOkt" class="text-xs sm:text-sm font-black text-slate-800 uppercase border-b border-slate-200 pb-2">Maklumat Orang Kena Kompaun (OKK)</h4>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-slate-600 mb-1.5 uppercase">Nama Penuh Individu <span class="text-red-500">*</span></label>
-                        <input type="text" id="okkNama" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                        <input type="text" id="okkNama" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" style="text-transform: uppercase;">
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -268,7 +284,7 @@
                         </div>
                         <div>
                             <label class="block text-[10px] sm:text-xs font-bold text-slate-600 mb-1.5 uppercase">Jawatan <span class="text-red-500">*</span></label>
-                            <input type="text" id="okkJawatan" placeholder="CTH: PEMILIK / PEKERJA" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors">
+                            <input type="text" id="okkJawatan" placeholder="CTH: PEMILIK / PEKERJA" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" style="text-transform: uppercase;">
                         </div>
                     </div>
                 </div>
@@ -288,7 +304,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-emerald-800 mb-1.5 uppercase">No Resit <span id="wajibResitBintang" class="text-red-500">*</span></label>
-                        <input type="text" id="kompaunResit" class="w-full bg-white border border-emerald-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-emerald-500 outline-none transition-colors">
+                        <input type="text" id="kompaunResit" class="w-full bg-white border border-emerald-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-emerald-500 outline-none transition-colors" style="text-transform: uppercase;">
                     </div>
                 </div>
             </div>
@@ -299,7 +315,7 @@
                 <p class="text-[10px] sm:text-xs text-slate-600 mb-3 font-bold uppercase bg-blue-50 p-3 rounded-lg border border-blue-100 leading-relaxed">Format: Jenis Barang, Kuantiti, Nilai RM <br><span class="font-normal opacity-80">(Cth: GULA KASAR, 50 KG, 142.50)</span></p>
                 
                 <div class="flex flex-col space-y-3 mb-5">
-                    <textarea id="tampalSitaan" rows="3" oninput="window.autoResize(this);" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" placeholder="TAIP ATAU TAMPAL DI SINI..." style="min-height:80px;"></textarea>
+                    <textarea id="tampalSitaan" rows="3" oninput="window.autoResize(this);" class="w-full bg-white border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-colors" placeholder="TAIP ATAU TAMPAL DI SINI..." style="min-height:80px; text-transform: uppercase;"></textarea>
                     <button onclick="window.prosesSitaan()" class="self-end bg-slate-800 hover:bg-slate-900 text-white px-6 py-3.5 rounded-xl text-xs sm:text-sm font-bold uppercase w-full sm:w-auto tracking-widest shadow-md transition-all">Masuk Ke Jadual ⬇</button>
                 </div>
                 
@@ -355,7 +371,7 @@
                 
                 <p class="text-[10px] sm:text-xs text-red-500 font-bold mb-3 uppercase flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Anda boleh menyunting teks di dalam kotak ini. Tekan Simpan Pindaan untuk kemas kini pangkalan data.</p>
                 
-                <textarea id="pratontonTeks" rows="15" oninput="window.autoResize(this)" class="w-full whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed text-slate-800 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-300 font-semibold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-all" style="resize: none; overflow: hidden; min-height: 250px;"></textarea>
+                <textarea id="pratontonTeks" rows="15" oninput="window.autoResize(this)" class="w-full whitespace-pre-wrap font-sans text-[10px] sm:text-sm leading-relaxed text-slate-800 bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-300 font-semibold uppercase focus:ring-2 focus:ring-blue-500 outline-none transition-all" style="resize: none; overflow: hidden; min-height: 250px; text-transform: uppercase;"></textarea>
             </div>
         </div>
 
@@ -396,14 +412,14 @@
                 
                 <!-- BUTANG KELUAR BALAI -->
                 <div class="absolute top-4 right-4 sm:top-6 sm:right-6">
-                    <button onclick="window.logout()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-bold py-2 px-3 rounded-xl text-[10px] sm:text-xs uppercase tracking-widest transition-colors shadow-sm flex items-center space-x-1">
+                    <button onclick="window.keluarKeUtama()" class="bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 font-bold py-2 px-4 rounded-xl text-[10px] sm:text-xs uppercase tracking-widest transition-colors shadow-sm flex items-center space-x-1">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                         <span>Keluar</span>
                     </button>
                 </div>
 
-                <div class="mx-auto mb-4 flex items-center justify-center bg-white p-2 w-fit rounded-xl shadow-sm border border-slate-100 mt-4 sm:mt-0">
-                    <img src="JATA.jpg" alt="Jata Negara" class="h-20 sm:h-24 object-contain mix-blend-multiply">
+                <div class="mx-auto mb-4 flex items-center justify-center bg-transparent p-0 w-fit mt-4 sm:mt-0">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg" alt="Jata Negara" class="h-20 sm:h-24 object-contain mix-blend-multiply opacity-90">
                 </div>
                 
                 <p class="text-slate-600 text-[10px] sm:text-xs font-extrabold mb-6 uppercase leading-relaxed text-center tracking-wide">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -437,10 +453,78 @@
             </div>
         </div>
 
-        <!-- ADMIN TAB -->
+        <!-- PEMANTAUAN ADMIN TAB -->
+        <div id="admin-laporan" class="tab-content max-w-6xl mx-auto space-y-6 mt-4">
+            <div class="bg-slate-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-xl text-white">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+                    <div>
+                        <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide">Pusat Pemantauan & Statistik</h2>
+                        <p class="text-slate-400 text-[10px] sm:text-xs mt-1 font-bold uppercase tracking-wider">Log Aktiviti Keseluruhan Anggota Sistem</p>
+                    </div>
+                    <button onclick="window.muatPemantauanAdmin()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all uppercase tracking-wider flex items-center justify-center space-x-2">
+                        <span>🔄 REFRESH DATA</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Kad Statistik -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-500 font-extrabold uppercase mb-1">Jumlah Keseluruhan</p>
+                    <p id="statJumlah" class="text-3xl sm:text-4xl font-black text-slate-800">0</p>
+                </div>
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-500 font-extrabold uppercase mb-1">Kes COTS</p>
+                    <p id="statCots" class="text-3xl sm:text-4xl font-black text-blue-600">0</p>
+                </div>
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-500 font-extrabold uppercase mb-1">Kes Sitaan</p>
+                    <p id="statSitaan" class="text-3xl sm:text-4xl font-black text-amber-500">0</p>
+                </div>
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
+                    <p class="text-[10px] sm:text-xs text-slate-500 font-extrabold uppercase mb-1">Pegawai Terlibat</p>
+                    <p id="statPegawai" class="text-3xl sm:text-4xl font-black text-emerald-600">0</p>
+                </div>
+            </div>
+
+            <!-- Tapisan (Filters) -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row gap-3">
+                <select id="filterPegawai" onchange="window.tapisPemantauan()" class="w-full sm:w-1/3 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase outline-none"></select>
+                <select id="filterBulan" onchange="window.tapisPemantauan()" class="w-full sm:w-1/3 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase outline-none">
+                    <option value="ALL">SEMUA BULAN / TAHUN</option>
+                </select>
+                <select id="filterMod" onchange="window.tapisPemantauan()" class="w-full sm:w-1/3 bg-slate-50 border border-slate-300 rounded-xl px-4 py-3 text-xs sm:text-sm font-bold text-slate-800 uppercase outline-none">
+                    <option value="ALL">SEMUA MOD LAPORAN</option>
+                    <option value="COTS">COTS SAHAJA</option>
+                    <option value="SITAAN">SITAAN SAHAJA</option>
+                </select>
+            </div>
+
+            <!-- Jadual Pemantauan -->
+            <div class="border border-slate-200 rounded-2xl overflow-hidden shadow-sm bg-white">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left min-w-[800px]">
+                        <thead class="text-[10px] sm:text-xs text-slate-500 uppercase bg-slate-100 border-b border-slate-200 font-extrabold">
+                            <tr>
+                                <th class="px-4 py-4">Tarikh & Masa Dijana</th>
+                                <th class="px-4 py-4">Pegawai Pelapor</th>
+                                <th class="px-4 py-4">Mod Kes</th>
+                                <th class="px-4 py-4">Kod Balai</th>
+                                <th class="px-4 py-4 text-center">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jadualPemantauanBody" class="divide-y divide-slate-100 bg-white">
+                            <tr><td colspan="5" class="px-4 py-8 text-center text-[10px] sm:text-xs text-slate-400 italic font-bold">SILA TEKAN BUTANG REFRESH DATA DI ATAS.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN TAB (PANGKALAN DATA) -->
         <div id="admin" class="tab-content max-w-4xl mx-auto space-y-6 mt-4">
             <div class="bg-slate-800 rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl text-white mb-6">
-                <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide">Pusat Admin (Firebase)</h2>
+                <h2 class="text-xl sm:text-3xl font-black uppercase tracking-wide">Pusat Admin (Pangkalan Data)</h2>
                 <p class="text-slate-400 text-[10px] sm:text-xs mt-2 font-bold uppercase tracking-wider">Penyegerakan Pangkalan Data Firestore Secara Terus</p>
             </div>
             <div id="adminCardsContainer" class="space-y-4 sm:space-y-6"></div>
@@ -487,6 +571,9 @@
         let kesalahanDipilih = null;
         let editModeKod = null; 
         let editModeDocId = null; 
+        
+        // Pembolehubah Global Untuk Pemantauan Admin
+        let semuaLaporanAdmin = [];
 
         function setLoader(state, text = "Sedang Memproses...") {
             let loader = document.getElementById('globalLoader');
@@ -657,8 +744,13 @@
                 document.getElementById('pemohonTempat').value = currTempat;
 
                 let isAdminCheck = (currentUser.peranan === 'ADMIN' || currentUser.isAdmin === true);
-                if(isAdminCheck) document.getElementById('nav-admin').classList.remove('hidden');
-                else document.getElementById('nav-admin').classList.add('hidden');
+                if(isAdminCheck) {
+                    document.getElementById('nav-admin').classList.remove('hidden');
+                    document.getElementById('nav-admin-laporan').classList.remove('hidden');
+                } else {
+                    document.getElementById('nav-admin').classList.add('hidden');
+                    document.getElementById('nav-admin-laporan').classList.add('hidden');
+                }
 
                 document.getElementById('loginOverlay').classList.add('hidden');
                 document.getElementById('mainHeader').classList.remove('hidden');
@@ -677,6 +769,11 @@
             currentUser = null;
             document.getElementById('loginIc').value = '';
             document.getElementById('mainHeader').classList.add('hidden');
+            document.getElementById('appContainer').classList.add('hidden');
+            document.getElementById('loginOverlay').classList.remove('hidden');
+        }
+
+        function keluarKeUtama() {
             document.getElementById('appContainer').classList.add('hidden');
             document.getElementById('loginOverlay').classList.remove('hidden');
         }
@@ -1182,6 +1279,132 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             }
         }
 
+        // ============================================
+        // SISTEM PEMANTAUAN ADMIN (CCTV)
+        // ============================================
+
+        async function muatPemantauanAdmin() {
+            if(!auth.currentUser) return;
+            setLoader(true, "Menganalisis Pangkalan Data...");
+            
+            try {
+                const snap = await getDocs(laporanCol);
+                semuaLaporanAdmin = [];
+                let pList = {};
+                let bList = {};
+
+                snap.forEach(doc => {
+                    let d = doc.data();
+                    let dt = new Date(d.tarikhMasuk);
+                    let bulanKunci = dt.getFullYear() + "-" + String(dt.getMonth() + 1).padStart(2, '0');
+                    let tarikhPapar = dt.toLocaleDateString("ms-MY") + " " + dt.toLocaleTimeString("ms-MY", {hour:'2-digit', minute:'2-digit'});
+
+                    let namaPeg = d.icPemohon;
+                    if(DB.users[d.icPemohon]) {
+                        namaPeg = DB.users[d.icPemohon].namaPenuh || DB.users[d.icPemohon].nama || d.icPemohon;
+                    }
+
+                    pList[d.icPemohon] = namaPeg;
+                    bList[bulanKunci] = dt.toLocaleDateString("ms-MY", {month:'long', year:'numeric'}).toUpperCase();
+
+                    semuaLaporanAdmin.push({
+                        id: doc.id,
+                        ic: d.icPemohon,
+                        nama: namaPeg,
+                        tarikhRaw: dt,
+                        tarikh: tarikhPapar,
+                        bulanKunci: bulanKunci,
+                        mode: d.mode ? d.mode.toUpperCase() : "LAPORAN",
+                        kod: d.kodUnik,
+                        teks: d.teksLaporan
+                    });
+                });
+
+                semuaLaporanAdmin.sort((a,b) => b.tarikhRaw - a.tarikhRaw);
+
+                // Kemas Kini Dropdown Filter (Pegawai)
+                let fPeg = document.getElementById('filterPegawai');
+                fPeg.innerHTML = '<option value="ALL">SEMUA PEGAWAI</option>';
+                Object.keys(pList).forEach(ic => {
+                    fPeg.innerHTML += `<option value="${ic}">${pList[ic]} (${ic})</option>`;
+                });
+
+                // Kemas Kini Dropdown Filter (Bulan)
+                let fBul = document.getElementById('filterBulan');
+                fBul.innerHTML = '<option value="ALL">SEMUA BULAN / TAHUN</option>';
+                let sortedBulan = Object.keys(bList).sort().reverse();
+                sortedBulan.forEach(b => {
+                    fBul.innerHTML += `<option value="${b}">${bList[b]}</option>`;
+                });
+
+                tapisPemantauan();
+                showToast("Data Pemantauan Dikemas Kini!");
+
+            } catch(e) {
+                console.error(e);
+                showModal("Ralat Rangkaian", "Gagal memuat turun data pemantauan admin.");
+            } finally {
+                setLoader(false);
+            }
+        }
+
+        function tapisPemantauan() {
+            let p = document.getElementById('filterPegawai').value;
+            let b = document.getElementById('filterBulan').value;
+            let m = document.getElementById('filterMod').value;
+
+            let filtered = semuaLaporanAdmin.filter(item => {
+                let matchP = (p === 'ALL' || item.ic === p);
+                let matchB = (b === 'ALL' || item.bulanKunci === b);
+                let matchM = (m === 'ALL' || item.mode === m);
+                return matchP && matchB && matchM;
+            });
+
+            // Pengiraan Statistik
+            let tot = filtered.length;
+            let cots = filtered.filter(x => x.mode === 'COTS').length;
+            let sitaan = filtered.filter(x => x.mode === 'SITAAN').length;
+            let unqPegawai = new Set(filtered.map(x => x.ic)).size;
+
+            document.getElementById('statJumlah').innerText = tot;
+            document.getElementById('statCots').innerText = cots;
+            document.getElementById('statSitaan').innerText = sitaan;
+            document.getElementById('statPegawai').innerText = unqPegawai;
+
+            // Render Jadual
+            let tbody = document.getElementById('jadualPemantauanBody');
+            tbody.innerHTML = '';
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-[10px] sm:text-xs text-slate-400 italic font-bold">TIADA REKOD DIJUMPAI UNTUK TAPISAN INI.</td></tr>';
+                return;
+            }
+
+            filtered.forEach(item => {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td class="px-4 py-4 text-slate-800 font-bold uppercase text-[10px] sm:text-xs whitespace-nowrap">${item.tarikh}</td>
+                    <td class="px-4 py-4 text-slate-700 font-bold uppercase text-[10px] sm:text-xs">${item.nama} <br><span class="text-[9px] sm:text-[10px] text-slate-400 font-black tracking-widest">${item.ic}</span></td>
+                    <td class="px-4 py-4 text-blue-700 font-black uppercase text-[10px] sm:text-xs">${item.mode}</td>
+                    <td class="px-4 py-4 font-black tracking-widest text-emerald-700 text-xs sm:text-sm">${item.kod}</td>
+                    <td class="px-4 py-4 text-center">
+                        <button onclick="window.paparTeksLaporanAdmin('${item.id}')" class="bg-slate-800 text-white px-4 py-2 rounded-xl text-[10px] sm:text-xs font-bold hover:bg-slate-700 uppercase tracking-wider transition-colors shadow-md">BACA</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function paparTeksLaporanAdmin(id) {
+            let item = semuaLaporanAdmin.find(x => x.id === id);
+            if(item) {
+                document.getElementById('kandunganTeksPapar').innerText = item.teks;
+                document.getElementById('modalPaparTeks').classList.remove('hidden');
+            }
+        }
+
+        // ============================================
+
         async function cariLaporanBalai() {
             let kodCari = document.getElementById('carianKodBalai').value.trim();
             if(!kodCari) return showModal("Ralat", "Sila masukkan kod 5 angka terlebih dahulu.");
@@ -1199,6 +1422,19 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
 
                 let paparan = document.getElementById('paparanLaporanBalai');
                 if(found) {
+                    
+                    // PENGESAHAN TEMPOH SAH KOD (24 JAM)
+                    let masaDijana = new Date(found.tarikhMasuk).getTime();
+                    let masaSekarang = new Date().getTime();
+                    let bezaMasaMs = masaSekarang - masaDijana;
+                    let bezaJam = bezaMasaMs / (1000 * 60 * 60);
+
+                    if (bezaJam > 24) {
+                        paparan.classList.add('hidden');
+                        showModal("Kod Akses Luput", "Harap Maaf. Kod akses ini telah luput tempoh sah (melebihi 24 jam). Sila hubungi pegawai pelapor untuk janaan kod baharu.");
+                        return; // Hentikan fungsi jika luput
+                    }
+
                     document.getElementById('teksLaporanBalai').innerText = found.teksLaporan;
                     paparan.classList.remove('hidden');
                     showToast("Laporan Dijumpai!");
@@ -1351,8 +1587,8 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
                     return `<div class="flex flex-col sm:flex-row justify-between sm:items-center w-full gap-2">
                                 <span class="truncate pr-2">${p.namaPenuh || p.nama} (${p.ic}) - ${p.jawatanSingkatan || p.jawatan}</span>
                                 <div class="flex space-x-2 flex-shrink-0">
-                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold ${perColor}">${per}</span>
-                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold ${statColor}">${stat}</span>
+                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold tracking-wider ${perColor}">${per}</span>
+                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold tracking-wider ${statColor}">${stat}</span>
                                 </div>
                             </div>`;
                 }) },
@@ -1389,23 +1625,27 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => {
-                if(el.id !== 'nav-admin' && el.id !== 'nav-balai') {
+                if(el.id !== `nav-${tabId}` && el.id !== 'nav-balai') {
                     el.classList.remove('bg-blue-600'); 
                     el.classList.add('bg-slate-700');
                 }
             });
+            
             document.getElementById(tabId).classList.add('active');
-            if(tabId !== 'admin' && document.getElementById('nav-' + tabId)) {
+            if(document.getElementById('nav-' + tabId)) {
                 document.getElementById('nav-' + tabId).classList.add('bg-blue-600');
                 document.getElementById('nav-' + tabId).classList.remove('bg-slate-700');
             }
 
+            // Fungsi Auto-Refresh untuk tab tertentu
             if(tabId === 'sejarah' && currentUser) { muatSejarah(); }
+            if(tabId === 'admin-laporan' && currentUser && (currentUser.peranan === 'ADMIN' || currentUser.isAdmin === true)) { muatPemantauanAdmin(); }
         }
 
         window.switchTab = switchTab;
         window.handleLogin = handleLogin;
         window.logout = logout;
+        window.keluarKeUtama = keluarKeUtama;
         window.bukaModBalaiAwam = bukaModBalaiAwam;
         window.mintaTukarMod = mintaTukarMod;
         window.laksanaTukarMod = laksanaTukarMod;
@@ -1429,8 +1669,20 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
         window.muatTurunCSV = muatTurunCSV;
         window.closeModal = closeModal;
         window.autoResize = autoResize;
+        
+        // Fungsi Tambahan Pemantauan
+        window.muatPemantauanAdmin = muatPemantauanAdmin;
+        window.tapisPemantauan = tapisPemantauan;
+        window.paparTeksLaporanAdmin = paparTeksLaporanAdmin;
 
         window.onload = initApp;
     </script>
 </body>
 </html>
+```
+
+### Cara Memuat Naik (Upload)
+Sama seperti biasa, anda hanya perlu:
+1. Gantikan kod penuh di dalam fail `index.html` pada komputer anda.
+2. Muat naik (*commit/push*) fail baharu tersebut ke dalam GitHub anda.
+3. Vercel akan menerbitkannya secara automatik, dan anda boleh masuk sebagai Admin untuk melihat menu **PEMANTAUAN** yang baru ini!
