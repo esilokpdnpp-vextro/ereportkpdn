@@ -64,7 +64,7 @@
             <div class="flex flex-col md:flex-row items-center justify-between p-3 md:px-6 md:h-16 space-y-3 md:space-y-0">
                 <div class="flex items-center space-x-3 w-full md:w-auto justify-center md:justify-start">
                     <div class="flex items-center justify-center bg-transparent p-0 rounded-md shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg" alt="Logo KPDN" class="h-10 md:h-12 object-contain mix-blend-screen opacity-90">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jata_Malaysia.svg/800px-Jata_Malaysia.svg.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg'" alt="Logo KPDN" class="h-10 md:h-12 object-contain mix-blend-screen opacity-90">
                     </div>
                     <div class="text-center md:text-left flex-1">
                         <h1 class="text-sm md:text-lg font-bold uppercase tracking-wide leading-tight">SISTEM E-REPORT KPDN</h1>
@@ -90,7 +90,7 @@
         <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl sm:shadow-2xl w-full max-w-md flex flex-col justify-center relative overflow-hidden">
             
             <div class="mx-auto mb-2 flex items-center justify-center bg-transparent p-0 w-fit">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg" alt="Logo KPDN" class="h-24 sm:h-32 object-contain mix-blend-multiply">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jata_Malaysia.svg/800px-Jata_Malaysia.svg.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg'" alt="Logo KPDN" class="h-24 sm:h-32 object-contain mix-blend-multiply">
             </div>
                  
             <p class="text-slate-600 text-[10px] sm:text-xs font-bold mb-6 uppercase leading-relaxed text-center">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -360,7 +360,7 @@
                     </h3>
                     
                     <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2 w-full sm:w-auto mt-3 sm:mt-0">
-                        <button onclick="window.kemaskiniLaporan()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-xl shadow-md text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors">
+                        <button id="btnSimpanPindaan" onclick="window.kemaskiniLaporan()" class="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-black px-6 py-3.5 rounded-xl shadow-md text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors">
                             <span>💾 SIMPAN PINDAAN</span>
                         </button>
                         <button onclick="window.hantarEmel()" class="w-full sm:w-auto bg-amber-500 hover:bg-amber-600 text-white font-black px-6 py-3.5 rounded-xl shadow-md text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center space-x-2 transition-colors">
@@ -396,10 +396,11 @@
                                 <th class="px-4 py-3">Mod</th>
                                 <th class="px-4 py-3">Premis / Maklumat</th>
                                 <th class="px-4 py-3 text-center">Kod Balai</th>
+                                <th class="px-4 py-3 text-center w-24">Tindakan</th>
                             </tr>
                         </thead>
                         <tbody id="jadualSejarahBody" class="divide-y divide-slate-100 bg-white">
-                            <tr><td colspan="4" class="px-4 py-8 text-center text-[10px] sm:text-xs text-slate-400 italic font-bold">SILA TEKAN BUTANG REFRESH UNTUK MEMUAT TURUN DATA.</td></tr>
+                            <tr><td colspan="5" class="px-4 py-8 text-center text-[10px] sm:text-xs text-slate-400 italic font-bold">SILA TEKAN BUTANG REFRESH UNTUK MEMUAT TURUN DATA.</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -419,7 +420,7 @@
                 </div>
 
                 <div class="mx-auto mb-4 flex items-center justify-center bg-transparent p-0 w-fit mt-4 sm:mt-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg" alt="Jata Negara" class="h-20 sm:h-24 object-contain mix-blend-multiply opacity-90">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jata_Malaysia.svg/800px-Jata_Malaysia.svg.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg'" alt="Jata Negara" class="h-20 sm:h-24 object-contain mix-blend-multiply opacity-90">
                 </div>
                 
                 <p class="text-slate-600 text-[10px] sm:text-xs font-extrabold mb-6 uppercase leading-relaxed text-center tracking-wide">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -574,6 +575,7 @@
         
         // Pembolehubah Global Untuk Pemantauan Admin
         let semuaLaporanAdmin = [];
+        let sejarahLengkap = []; // Menyimpan sejarah penuh untuk fungsi edit
 
         function setLoader(state, text = "Sedang Memproses...") {
             let loader = document.getElementById('globalLoader');
@@ -1235,41 +1237,58 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             try {
                 const snap = await getDocs(laporanCol);
                 let sejarah = [];
+                sejarahLengkap = [];
+                
                 snap.forEach(doc => {
                     let data = doc.data();
                     if(String(data.icPemohon) === String(currentUser.ic)) {
                         let dt = new Date(data.tarikhMasuk);
                         let dateStr = dt.toLocaleDateString("ms-MY") + " " + dt.toLocaleTimeString("ms-MY", {hour:'2-digit', minute:'2-digit'});
-                        sejarah.push({
+                        
+                        let itemData = {
                             id: doc.id,
                             kod: data.kodUnik,
                             tarikhRaw: data.tarikhMasuk,
                             tarikh: dateStr,
                             mode: data.mode || "LAPORAN",
-                            premis: data.premis || "TIDAK DIKETAHUI"
-                        });
+                            premis: data.premis || "TIDAK DIKETAHUI",
+                            teks: data.teksLaporan
+                        };
+                        
+                        sejarah.push(itemData);
+                        sejarahLengkap.push(itemData);
                     }
                 });
 
                 sejarah.sort((a,b) => new Date(b.tarikhRaw) - new Date(a.tarikhRaw));
+                sejarahLengkap.sort((a,b) => new Date(b.tarikhRaw) - new Date(a.tarikhRaw));
 
                 let tbody = document.getElementById('jadualSejarahBody');
                 tbody.innerHTML = '';
                 
                 if(sejarah.length > 0) {
                     sejarah.forEach(item => {
+                        let masaDijana = new Date(item.tarikhRaw).getTime();
+                        let bezaJam = (new Date().getTime() - masaDijana) / (1000 * 60 * 60);
+                        let bolehEdit = bezaJam <= 24;
+                        
+                        let btnAction = bolehEdit ? 
+                            `<button onclick="window.editDariSejarah('${item.id}')" class="bg-emerald-100 text-emerald-700 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider hover:bg-emerald-200 w-full mb-1">PINDA</button>` : 
+                            `<button onclick="window.lihatDariSejarah('${item.id}')" class="bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-wider hover:bg-slate-200 w-full mb-1">LIHAT</button>`;
+
                         let tr = document.createElement('tr');
                         tr.innerHTML = `
                             <td class="px-4 py-4 text-slate-800 font-bold uppercase text-[10px] sm:text-xs">${item.tarikh}</td>
                             <td class="px-4 py-4 text-blue-700 font-black uppercase text-[10px] sm:text-xs">${item.mode}</td>
                             <td class="px-4 py-4 text-slate-600 font-bold uppercase text-[10px] sm:text-xs">${item.premis}</td>
                             <td class="px-4 py-4 text-center font-black tracking-widest text-emerald-700 text-sm sm:text-base bg-emerald-50">${item.kod}</td>
+                            <td class="px-4 py-4 text-center align-middle">${btnAction}</td>
                         `;
                         tbody.appendChild(tr);
                     });
                     showToast("Rekod Sejarah Dikemas Kini!");
                 } else {
-                    tbody.innerHTML = '<tr><td colspan="4" class="px-4 py-8 text-center text-[10px] sm:text-xs text-slate-400 italic font-bold">TIADA REKOD LAPORAN DIJUMPAI.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-[10px] sm:text-xs text-slate-400 italic font-bold">TIADA REKOD LAPORAN DIJUMPAI.</td></tr>';
                 }
             } catch(err) {
                 console.error(err);
@@ -1277,6 +1296,47 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             } finally {
                 setLoader(false);
             }
+        }
+
+        function editDariSejarah(id) {
+            let item = sejarahLengkap.find(x => x.id === id);
+            if(!item) return;
+            
+            document.getElementById('pratontonTeks').value = item.teks;
+            document.getElementById('pratontonTeks').readOnly = false;
+            editModeDocId = item.id;
+            editModeKod = item.kod;
+            document.getElementById('kodUnikTeks').innerText = item.kod;
+            
+            document.getElementById('pratontonKotak').classList.remove('hidden');
+            document.getElementById('paparanKodJana').classList.remove('hidden');
+            document.getElementById('btnSimpanPindaan').classList.remove('hidden');
+            
+            switchTab('dashboard');
+            setTimeout(() => {
+                let y = document.getElementById('pratontonKotak').getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({top: y, behavior: 'smooth'});
+            }, 300);
+        }
+
+        function lihatDariSejarah(id) {
+            let item = sejarahLengkap.find(x => x.id === id);
+            if(!item) return;
+            
+            document.getElementById('pratontonTeks').value = item.teks;
+            document.getElementById('pratontonTeks').readOnly = true; 
+            document.getElementById('kodUnikTeks').innerText = item.kod;
+            
+            document.getElementById('pratontonKotak').classList.remove('hidden');
+            document.getElementById('paparanKodJana').classList.remove('hidden');
+            document.getElementById('btnSimpanPindaan').classList.add('hidden'); 
+            
+            switchTab('dashboard');
+            setTimeout(() => {
+                let y = document.getElementById('pratontonKotak').getBoundingClientRect().top + window.scrollY - 80;
+                window.scrollTo({top: y, behavior: 'smooth'});
+                showToast("Mod Baca: Laporan ini telah melebihi 24 jam.");
+            }, 300);
         }
 
         // ============================================
@@ -1574,35 +1634,133 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             document.body.removeChild(link);
         }
 
+        async function simpanSettingsKeFirebase() {
+            setLoader(true, "Menyimpan ke Firebase...");
+            try {
+                await setDoc(settingsDoc, {
+                    pegawai: DB.pegawai,
+                    tugasan: DB.tugasan,
+                    ksAkta: DB.ksAkta,
+                    kodKawasan: DB.kodKawasan,
+                    kesalahan: DB.kesalahan,
+                    jenisBayar: DB.jenisBayar
+                });
+                showToast("Berjaya dikemas kini!");
+                initApp(); 
+            } catch(err) {
+                console.error(err);
+                showModal("Ralat", "Gagal menyimpan data.");
+            } finally {
+                setLoader(false);
+            }
+        }
+
+        window.padamDataAdmin = function(kat, index) {
+            showConfirm("Pengesahan Padam", "Adakah anda pasti mahu memadam rekod ini dari sistem?", `
+                DB['${kat}'].splice(${index}, 1);
+                window.simpanSettingsKeFirebase();
+            `);
+        }
+
+        window.tambahPegawaiAdmin = function() {
+            let ic = document.getElementById('addPegIc').value.trim();
+            let nama = document.getElementById('addPegNama').value.trim().toUpperCase();
+            let jawatan = document.getElementById('addPegJawatan').value.trim().toUpperCase();
+            let peranan = document.getElementById('addPegPeranan').value;
+            let status = document.getElementById('addPegStatus').value;
+            
+            if(!ic || !nama || !jawatan) return showModal("Ralat", "Sila lengkapkan No IC, Nama dan Jawatan.");
+            let icStr = ("000000000000" + ic.replace(/[^0-9]/g, '')).slice(-12);
+            
+            if(DB.users[icStr]) return showModal("Ralat", "Pegawai dengan IC ini sudah wujud.");
+            
+            DB.pegawai.unshift({
+                ic: icStr,
+                namaPenuh: nama,
+                jawatanSingkatan: jawatan,
+                namaJawatanPenuh: jawatan,
+                tempatBertugas: "KPDN",
+                peranan: peranan,
+                isAdmin: peranan === 'ADMIN',
+                status: status,
+                isAktif: status === 'AKTIF'
+            });
+            simpanSettingsKeFirebase();
+        }
+
+        window.tambahItemAdmin = function(kat, inputId) {
+            let val = document.getElementById(inputId).value.trim().toUpperCase();
+            if(!val) return showModal("Ralat", "Sila masukkan teks yang sah.");
+            DB[kat].unshift(val);
+            simpanSettingsKeFirebase();
+        }
+
         function renderAdminData() {
             let container = document.getElementById('adminCardsContainer');
             container.innerHTML = '';
             
+            let formPegawai = `
+                <div class="bg-blue-50 border border-blue-200 p-4 rounded-xl mb-4 flex flex-col gap-3">
+                    <h4 class="text-xs font-black text-blue-800 uppercase">+ Tambah Pegawai Secara Terus</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs">
+                        <input type="text" id="addPegIc" placeholder="NO IC (Cth: 900101145566)" class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700">
+                        <input type="text" id="addPegNama" placeholder="NAMA PENUH" class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700 sm:col-span-2">
+                        <input type="text" id="addPegJawatan" placeholder="JAWATAN (Cth: KPP)" class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700">
+                        <div class="flex gap-2">
+                            <select id="addPegPeranan" class="px-3 py-2 rounded border font-bold text-slate-700 flex-1"><option value="PENGGUNA">PENGGUNA</option><option value="ADMIN">ADMIN</option></select>
+                            <select id="addPegStatus" class="px-3 py-2 rounded border font-bold text-slate-700 flex-1"><option value="AKTIF">AKTIF</option><option value="TIDAK AKTIF">TIDAK AKTIF</option></select>
+                        </div>
+                    </div>
+                    <button onclick="window.tambahPegawaiAdmin()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded font-bold uppercase tracking-wider text-xs w-full sm:w-auto self-end shadow-sm">SIMPAN PEGAWAI</button>
+                </div>
+            `;
+
             let sections = [
-                { id: 'pegawai', tajuk: '1. Pangkalan Data Pegawai', data: DB.pegawai.map(p => {
-                    let per = p.peranan || (p.isAdmin ? 'ADMIN' : 'PENGGUNA');
-                    let stat = p.status || (p.isAktif === false ? 'TIDAK AKTIF' : 'AKTIF');
-                    let perColor = per === 'ADMIN' ? 'text-amber-600 bg-amber-50' : 'text-slate-500 bg-slate-100';
-                    let statColor = stat === 'AKTIF' ? 'text-emerald-600 bg-emerald-50' : 'text-red-600 bg-red-50';
-                    return `<div class="flex flex-col sm:flex-row justify-between sm:items-center w-full gap-2">
-                                <span class="truncate pr-2">${p.namaPenuh || p.nama} (${p.ic}) - ${p.jawatanSingkatan || p.jawatan}</span>
-                                <div class="flex space-x-2 flex-shrink-0">
-                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold tracking-wider ${perColor}">${per}</span>
-                                    <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold tracking-wider ${statColor}">${stat}</span>
-                                </div>
-                            </div>`;
+                { 
+                    id: 'pegawai', 
+                    tajuk: '1. Pangkalan Data Pegawai', 
+                    formTambah: formPegawai,
+                    data: DB.pegawai.map((p, idx) => {
+                        let per = p.peranan || (p.isAdmin ? 'ADMIN' : 'PENGGUNA');
+                        let stat = p.status || (p.isAktif === false ? 'TIDAK AKTIF' : 'AKTIF');
+                        let perColor = per === 'ADMIN' ? 'text-amber-600 bg-amber-50' : 'text-slate-500 bg-slate-100';
+                        let statColor = stat === 'AKTIF' ? 'text-emerald-600 bg-emerald-50' : 'text-red-600 bg-red-50';
+                        let icPapar = String(p.ic || "0").padStart(12, '0');
+                        return `<div class="flex flex-col sm:flex-row justify-between sm:items-center w-full gap-2">
+                                    <span class="truncate pr-2">${p.namaPenuh || p.nama} (${icPapar}) - ${p.jawatanSingkatan || p.jawatan}</span>
+                                    <div class="flex items-center space-x-2 flex-shrink-0">
+                                        <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold tracking-wider ${perColor}">${per}</span>
+                                        <span class="px-2.5 py-1 rounded border border-slate-200 font-extrabold tracking-wider ${statColor}">${stat}</span>
+                                        <button onclick="window.padamDataAdmin('pegawai', ${idx})" class="bg-red-50 hover:bg-red-100 text-red-600 px-3 py-1 rounded border border-red-200 font-black transition-colors ml-2">X</button>
+                                    </div>
+                                </div>`;
                 }) },
-                { id: 'tugasan', tajuk: '2. Senarai Tugasan Pasukan', data: DB.tugasan },
-                { id: 'ksAkta', tajuk: '3. Kod Akta (Kertas Siasatan)', data: DB.ksAkta },
-                { id: 'kodKawasan', tajuk: '4. Kod Kawasan Cawangan', data: DB.kodKawasan },
-                { id: 'kesalahan', tajuk: '5. Pokok Kesalahan', data: DB.kesalahan.map(k => `${k.akta} > ${k.seksyen} > ${k.jenis}`) },
-                { id: 'jenisBayar', tajuk: '6. Jenis Bayaran (COTS)', data: DB.jenisBayar }
+                { 
+                    id: 'tugasan', tajuk: '2. Senarai Tugasan Pasukan', 
+                    formTambah: `<div class="flex gap-2 mb-4"><input type="text" id="addTugasan" placeholder="NAMA TUGASAN BAHARU..." class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700 flex-1 text-xs"><button onclick="window.tambahItemAdmin('tugasan', 'addTugasan')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs">TAMBAH</button></div>`,
+                    data: DB.tugasan.map((item, idx) => `<div class="flex justify-between items-center w-full"><span>${item}</span><button onclick="window.padamDataAdmin('tugasan', ${idx})" class="text-red-500 hover:text-red-700 font-black px-2">X</button></div>`) 
+                },
+                { 
+                    id: 'ksAkta', tajuk: '3. Kod Akta (Kertas Siasatan)', 
+                    formTambah: `<div class="flex gap-2 mb-4"><input type="text" id="addKsAkta" placeholder="KOD AKTA BAHARU..." class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700 flex-1 text-xs"><button onclick="window.tambahItemAdmin('ksAkta', 'addKsAkta')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs">TAMBAH</button></div>`,
+                    data: DB.ksAkta.map((item, idx) => `<div class="flex justify-between items-center w-full"><span>${item}</span><button onclick="window.padamDataAdmin('ksAkta', ${idx})" class="text-red-500 hover:text-red-700 font-black px-2">X</button></div>`) 
+                },
+                { 
+                    id: 'kodKawasan', tajuk: '4. Kod Kawasan Cawangan', 
+                    formTambah: `<div class="flex gap-2 mb-4"><input type="text" id="addKaw" placeholder="KOD KAWASAN BAHARU..." class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700 flex-1 text-xs"><button onclick="window.tambahItemAdmin('kodKawasan', 'addKaw')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs">TAMBAH</button></div>`,
+                    data: DB.kodKawasan.map((item, idx) => `<div class="flex justify-between items-center w-full"><span>${item}</span><button onclick="window.padamDataAdmin('kodKawasan', ${idx})" class="text-red-500 hover:text-red-700 font-black px-2">X</button></div>`) 
+                },
+                { 
+                    id: 'jenisBayar', tajuk: '5. Jenis Bayaran (COTS)', 
+                    formTambah: `<div class="flex gap-2 mb-4"><input type="text" id="addBayar" placeholder="JENIS BAYARAN BAHARU..." class="px-3 py-2 rounded border focus:ring-2 outline-none uppercase font-bold text-slate-700 flex-1 text-xs"><button onclick="window.tambahItemAdmin('jenisBayar', 'addBayar')" class="bg-blue-600 text-white px-4 py-2 rounded font-bold text-xs">TAMBAH</button></div>`,
+                    data: DB.jenisBayar.map((item, idx) => `<div class="flex justify-between items-center w-full"><span>${item}</span><button onclick="window.padamDataAdmin('jenisBayar', ${idx})" class="text-red-500 hover:text-red-700 font-black px-2">X</button></div>`) 
+                }
             ];
 
             sections.forEach(sec => {
-                let listHTML = sec.data.map((item) => `
+                let listHTML = sec.data.map((itemHTML) => `
                     <li class="bg-slate-50 border border-slate-100 p-3 sm:p-4 rounded-xl text-[10px] sm:text-xs text-slate-700 uppercase font-black shadow-sm mb-2">
-                        <span>${item}</span>
+                        ${itemHTML}
                     </li>
                 `).join('');
 
@@ -1615,6 +1773,7 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
                                 <button onclick="window.muatNaikCSV('${sec.id}')" class="flex-1 sm:flex-none text-[10px] sm:text-xs bg-emerald-600 text-white px-4 py-3 sm:px-5 sm:py-2.5 rounded-xl font-black transition shadow-md hover:bg-emerald-700 uppercase tracking-widest">↑ Muat Naik CSV</button>
                             </div>
                         </div>
+                        ${sec.formTambah || ''}
                         <ul class="max-h-64 overflow-y-auto pr-2 styled-scrollbar">${listHTML || '<li class="text-[10px] sm:text-xs text-slate-400 italic font-bold p-6 text-center bg-slate-50 rounded-xl">Tiada rekod dijumpai.</li>'}</ul>
                     </div>
                 `;
@@ -1662,11 +1821,17 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
         window.kemaskiniLaporan = kemaskiniLaporan;
         window.hantarEmel = hantarEmel;
         window.muatSejarah = muatSejarah;
+        window.editDariSejarah = editDariSejarah;
+        window.lihatDariSejarah = lihatDariSejarah;
         window.cariLaporanBalai = cariLaporanBalai;
         window.salinLaporanBalai = salinLaporanBalai;
         window.resetBalai = resetBalai;
         window.muatNaikCSV = muatNaikCSV;
         window.muatTurunCSV = muatTurunCSV;
+        window.simpanSettingsKeFirebase = simpanSettingsKeFirebase;
+        window.padamDataAdmin = padamDataAdmin;
+        window.tambahPegawaiAdmin = tambahPegawaiAdmin;
+        window.tambahItemAdmin = tambahItemAdmin;
         window.closeModal = closeModal;
         window.autoResize = autoResize;
         
