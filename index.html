@@ -64,7 +64,7 @@
             <div class="flex flex-col md:flex-row items-center justify-between p-3 md:px-6 md:h-16 space-y-3 md:space-y-0">
                 <div class="flex items-center space-x-3 w-full md:w-auto justify-center md:justify-start">
                     <div class="flex items-center justify-center bg-transparent p-0 rounded-md shadow-sm">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jata_Malaysia.svg/800px-Jata_Malaysia.svg.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg'" alt="Logo KPDN" class="h-10 md:h-12 object-contain mix-blend-screen opacity-90">
+                        <img src="JATA.jpg" alt="Logo KPDN" class="h-10 md:h-12 object-contain bg-white rounded-lg p-1">
                     </div>
                     <div class="text-center md:text-left flex-1">
                         <h1 class="text-sm md:text-lg font-bold uppercase tracking-wide leading-tight">SISTEM E-REPORT KPDN</h1>
@@ -90,7 +90,7 @@
         <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl sm:shadow-2xl w-full max-w-md flex flex-col justify-center relative overflow-hidden">
             
             <div class="mx-auto mb-2 flex items-center justify-center bg-transparent p-0 w-fit">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jata_Malaysia.svg/800px-Jata_Malaysia.svg.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg'" alt="Logo KPDN" class="h-24 sm:h-32 object-contain mix-blend-multiply">
+                <img src="JATA.jpg" alt="Logo KPDN" class="h-24 sm:h-32 object-contain bg-white rounded-2xl p-2 shadow-sm">
             </div>
                  
             <p class="text-slate-600 text-[10px] sm:text-xs font-bold mb-6 uppercase leading-relaxed text-center">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -420,7 +420,7 @@
                 </div>
 
                 <div class="mx-auto mb-4 flex items-center justify-center bg-transparent p-0 w-fit mt-4 sm:mt-0">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Jata_Malaysia.svg/800px-Jata_Malaysia.svg.png" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/2/26/Jata_Malaysia.svg'" alt="Jata Negara" class="h-20 sm:h-24 object-contain mix-blend-multiply opacity-90">
+                    <img src="JATA.jpg" alt="Jata Negara" class="h-20 sm:h-24 object-contain">
                 </div>
                 
                 <p class="text-slate-600 text-[10px] sm:text-xs font-extrabold mb-6 uppercase leading-relaxed text-center tracking-wide">Kementerian Perdagangan Dalam Negeri<br>Dan Kos Sara Hidup</p>
@@ -665,10 +665,9 @@
                 // Susun Senarai Pegawai dari Firebase
                 DB.pegawai.forEach(p => {
                     let icStr = String(p.ic || "").replace(/[^0-9]/g, '');
-                    icStr = ("000000000000" + icStr).slice(-12);
                     
                     // Paksa Super Admin Kekal Jadi Admin Walaupun Ditimpa CSV
-                    if(icStr === "944442825025") { 
+                    if(icStr === "01944442825025") { 
                         p.isAdmin = true; 
                         p.peranan = "ADMIN";
                         p.isAktif = true; 
@@ -679,10 +678,10 @@
                 });
                 
                 // Jika IC Super Admin Langsung Tiada Dalam Sistem, Masukkan Secara Paksa
-                if(!DB.users["944442825025"]) {
+                if(!DB.users["01944442825025"]) {
                     let adminTulen = {...SUPER_ADMIN_FALLBACK};
-                    adminTulen.ic = "944442825025";
-                    DB.users["944442825025"] = adminTulen;
+                    adminTulen.ic = "01944442825025";
+                    DB.users["01944442825025"] = adminTulen;
                     DB.pegawai.push(adminTulen);
                 }
 
@@ -690,7 +689,7 @@
                 renderAdminData();
             } catch(err) {
                 console.error("Fetch DB Error:", err);
-                DB.users = { "944442825025": SUPER_ADMIN_FALLBACK };
+                DB.users = { "01944442825025": SUPER_ADMIN_FALLBACK };
                 DB.pegawai = [SUPER_ADMIN_FALLBACK];
                 DB.jenisBayar = ["TUNAI", "IPAYMENT", "TAWARAN 14 HARI"];
                 showModal("Amaran Rangkaian", "Gagal berhubung dengan Firebase. Sila muat semula halaman.");
@@ -722,7 +721,7 @@
             let icRaw = document.getElementById('loginIc').value.trim().replace(/[^0-9]/g, '');
             if(!icRaw) return showModal("Ralat", "Sila masukkan No Kad Pengenalan.");
             
-            let icStr = ("000000000000" + icRaw).slice(-12);
+            let icStr = icRaw;
             
             if(DB.users[icStr]) {
                 currentUser = DB.users[icStr];
@@ -1559,7 +1558,7 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
                             if (statusStr !== 'AKTIF' && statusStr !== 'TIDAK AKTIF') statusStr = 'AKTIF';
 
                             parsedArray.push({
-                                ic: cols[0].trim().replace(/['"]/g, '').toUpperCase(),
+                                ic: cols[0].trim().replace(/[^0-9]/g, ''),
                                 namaPenuh: cols[1].trim().replace(/['"]/g, '').toUpperCase(),
                                 jawatanSingkatan: cols[2].trim().replace(/['"]/g, '').toUpperCase(),
                                 namaJawatanPenuh: cols[3].trim().replace(/['"]/g, '').toUpperCase(),
@@ -1670,7 +1669,7 @@ SESALINAN KENYATAAN PEMERIKSAAN DAN AKUAN PENYITAAN YANG TELAH SIAP DITANDATANGA
             let status = document.getElementById('addPegStatus').value;
             
             if(!ic || !nama || !jawatan) return showModal("Ralat", "Sila lengkapkan No IC, Nama dan Jawatan.");
-            let icStr = ("000000000000" + ic.replace(/[^0-9]/g, '')).slice(-12);
+            let icStr = ic.replace(/[^0-9]/g, '');
             
             if(DB.users[icStr]) return showModal("Ralat", "Pegawai dengan IC ini sudah wujud.");
             
